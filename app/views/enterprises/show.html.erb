@@ -1,0 +1,12 @@
+<p id="notice"><%= notice %></p>
+<h1> Our Graph of Enterprises </h1>
+<%= javascript_include_tag "https://www.google.com/jsapi", "chartkick" %>
+<%= bar_chart @enterprises %>
+
+<p>
+  <strong>Name:</strong>
+  <%= @enterprise.name %>
+</p>
+
+<%= link_to 'Edit', edit_enterprise_path(@enterprise) %> |
+<%= link_to 'Back', enterprises_path %>

@@ -1,0 +1,47 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Enterprises</h1>
+
+ <% if user_signed_in? %>
+   <li class="active">
+      <%= link_to "Consult User", enterprises_path %>
+        <%= link_to "Close session", destroy_user_session_path, method: :delete %>
+
+        <br>
+        <br>
+
+
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th colspan="3"></th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @enterprises.each do |enterprise| %>
+              <tr>
+                <td><%= enterprise.name %></td>
+                <td><%= link_to 'Show', enterprise %></td>
+                <td><%= link_to 'Edit', edit_enterprise_path(enterprise) %></td>
+                <td><%= link_to 'Destroy', enterprise, method: :delete, data: { confirm: 'Are you sure?'},
+                  remote: true, class: 'delete_enterprise'%></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+
+        <br>
+
+        <%= link_to 'New Enterprise', new_enterprise_path %>
+
+    </li>
+    <%else%>
+    <li class="active">
+      <%= link_to "User Sign In", new_user_session_path %>
+    </li>
+    <%end%>
+    <h1> Our Graph of Enterprises </h1>
+    <%= javascript_include_tag "https://www.google.com/jsapi", "chartkick" %>
+    <%= pie_chart @enterpriseschart %>
